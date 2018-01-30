@@ -1,0 +1,323 @@
+
+      ___          ___                                  ___    ___   ___
+     /  /\        /__/\        _____       ___         /__/|  /__/| /  /\
+    /  /::\       \  \:\      /  /::\     /  /\       |  |:|  |__|//  /:/_
+   /  /:/\:\       \  \:\    /  /:/\:\   /  /:/       |  |:|      /  /:/ /\
+  /  /:/~/:/   ___  \  \:\  /  /:/~/::\ /__/::\     __|  |:|     /  /:/ /::\
+ /__/:/ /:/___/__/\  \__\:\/__/:/ /:/\:|\__\/\:\__ /__/\_|:|____/__/:/ /:/\:\
+ \  \:\/:::::/\  \:\ /  /:/\  \:\/:/~/:/   \  \:\/\\  \:\/:::::/\  \:\/:/~/:/
+  \  \::/~~~~  \  \:\  /:/  \  \::/ /:/     \__\::/ \  \::/~~~~  \  \::/ /:/
+   \  \:\       \  \:\/:/    \  \:\/:/      /__/:/   \  \:\       \__\/ /:/
+    \  \:\       \  \::/      \  \::/       \__\/     \  \:\        /__/:/
+     \__\/        \__\/        \__\/                   \__\/        \__\/
+
+                  ___           ___                         ___
+                 /  /\         /__/\         _____         /  /\
+                /  /:/         \  \:\       /  /::\       /  /:/_
+               /  /:/           \  \:\     /  /:/\:\     /  /:/ /\
+              /  /:/  ___   ___  \  \:\   /  /:/~/::\   /  /:/ /:/_
+             /__/:/  /  /\ /__/\  \__\:\ /__/:/ /:/\:| /__/:/ /:/ /\
+             \  \:\ /  /:/ \  \:\ /  /:/ \  \:\/:/~/:/ \  \:\/:/ /:/
+              \  \:\  /:/   \  \:\  /:/   \  \::/ /:/   \  \::/ /:/
+               \  \:\/:/     \  \:\/:/     \  \:\/:/     \  \:\/:/
+                \  \::/       \  \::/       \  \::/       \  \::/
+                 \__\/         \__\/         \__\/         \__\/
+
+===============================================================================
+1 - NOTAZIONE
+===============================================================================
+
+Per indicare tutti i movimenti che vengono fatti sulle varie facce del cubo è
+stata definita una notazione standard.
+
+Ogni faccia viene indicata con una lettera maiuscola, e se non diversamente
+indicato, rappresenta anche una rotazione della faccia corrispondente di 90° in
+senso orario. Per indicare la stessa rotazione ma in senso antiorario viene
+aggiunto il simbolo (') dopo la lettera. Una lettera seguita dal numero due
+indica una rotazione di 180° della faccia corrispondente. In questo caso il
+senso di rotazione non è rilevante.
+
+Esistono anche movimenti considerati in qualche modo "avanzati" che comprendono
+la rotazione contemporanea di 2 facce o dell'intero cubo.
+
+Tutta la notazione completa è indicata nella seguente tabella:
+
++---------+---------------+--------------------------------------------------+
+| Simboli | Significato   | Descrizione                                      |
++---------+---------------+--------------------------------------------------+
+| U       | Up            | faccia superiore rot. oraria di 90°              |
+| D       | Down          | faccia inferiore rot. oraria di 90°              |
+| R       | Right         | faccia destra rot. oraria di 90°                 |
+| L       | Left          | faccia sinistra rot. oraria di 90°               |
+| F       | Front         | faccia frontale rot. oraria di 90°               |
+| B       | Back          | faccia posteriore rot. oraria di 90°             |
+| M       | Middle slice  | faccia tra L e R (senso di rotazione di L)       |
+| E       | Equator slice | faccia tra U e D (senso di rotazione di D)       |
+| S       | Side slice    | faccia tra F e B (senso di rotazione di F)       |
+| Uw, u   | Up with       | facce U ed E insieme rot. oraria di 90°          |
+| Dw, d   | Down with     | facce D ed E insieme rot. oraria di 90°          |
+| Rw, r   | Right with    | facce R ed M insieme rot. oraria di 90°          |
+| Lw, l   | Left with     | facce L ed M insieme rot. oraria di 90°          |
+| Fw, f   | Front with    | facce F ed S insieme rot. oraria di 90°          |
+| Bw, b   | Back with     | facce B ed S insieme rot. oraria di 90°          |
+| x       | x-axis        | rot. di 90° dell'intero cubo attorno all'asse x. |
+|         |               | (come R ma tutto il cubo)                        |
+| y       | y-axis        | rot. di 90° dell'intero cubo attorno all'asse y. |
+|         |               | (come U ma tutto il cubo)                        |
+| z       | z-axis        | rot. di 90° dell'intero cubo attorno all'asse z. |
+|         |               | (come F ma tutto il cubo)                        |
++---------+---------------+--------------------------------------------------+
+
+
+
+
+===============================================================================
+2 - LIVELLO 1°
+===============================================================================
+
+Non ci sono algoritmi particolari per completare il primo livello. Questo viene
+risolto intuitivamente seguendo una semplice strategia che è quella di
+scegliere una faccia e creare una croce. Successivamente sistemiamo i gli
+spigoli che la compongono in modo che questi siano posizionati bene rispetto ai
+colori dei centri delle facce laterali. A questo punto non resta che
+posizionare i quattro angoli mancanti avendo cura di rispettare ancora una
+volta i colori delle facce laterali.
+
+
+
+
+===============================================================================
+3 - LIVELLO 2°
+===============================================================================
+
+Dopo aver risolto il primo livello, metti il cubo sottosopra. Ruota la faccia
+superiore del cubo cercando di allineare uno dei 4 spigoli necessari per
+completare il secondo strato con il suo centro davanti a te.
+   ___ ___ ___
+  |   | x |   |  A questo punto lo spigolo in alto dovrà essere posizionato a
+  '---'---'---'  destra o a sinistra a seconda se il colore dello sticker
+  |   | x |   |  collocato sulla faccia superiore sarà lo stesso della faccia
+  '---'---'---'  di destra o di sinistra.
+  | x | x | x |
+  '---'---'---'
+
+Muovere a DESTRA: U R U'R'U'F'U F                       ___ ___ ___
+                       oppure                          |   |   |   |
+                  U R U'R'F R'F'R                      '---'---'---'
+                                                       |   | x | x |
+                                                       '---'---'---'
+                                                       | x | x | x |
+                                                       '---'---'---'
+
+Muovere a SINISTRA: U'L'U L U F U'F'                    ___ ___ ___
+                         oppure                        |   |   |   |
+                    U'L'U L F'L F L'                   '---'---'---'
+                                                       | x | x |   |
+                                                       '---'---'---'
+                                                       | x | x | x |
+                                                       '---'---'---'
+
+Nel caso in cui uno spigolo da sistemare si trovi già nel secondo livello ma in
+una posizione sbagliata, si può procedere con inserire al suo posto un altro
+spigolo scelto casualmente dalla faccia superiore utilizzando uno degli
+algoritmi sopra.
+
+
+
+
+===============================================================================
+4 - 3° LIVELLO
+===============================================================================
+
+
+4.1 - Fare La Croce
+===============================================================================
+Completato il secondo strato, il prossimo step è creare una croce sulla faccia
+in alto del cubo quindi dobbiamo prendere in considerazione solo gli spigoli e
+per il momento tralasciare gli angoli.
+
+Adesso sulla faccia superiore possono verificarsi solo 3 casi dove, per ognuno
+dei quali, sarà sufficiente applicare il seguente algoritmo una o più volte in
+modo opportuno.
+                                 F (R U R' U') F'
+
+Nota: la parte centrale (quella tra parentesi) è spesso chiamata "sexy move" ed
+      è un movimento molto ricorrente come parte di altri algoritmi.
+
+4.1.1 - CASO 1: Linea
+-------------------------------------------------------------------------------
+Se sulla faccia superiore si è formata una linea, se necessario, ruotate la
+faccia in modo che questa risulti orizzontale e applicando l'algoritmo si
+risolverà immediatamente la croce.
+   ___ ___ ___              ___ ___ ___
+  |   |   |   |            |   | x |   |
+  '---'---'---'            '---'---'---'
+  | x | x | x |    ===>    | x | x | x |
+  '---'---'---'            '---'---'---'
+  |   |   |   |            |   | x |   |
+  '---'---'---'            '---'---'---'
+
+4.1.2 - CASO 2: Elle
+-------------------------------------------------------------------------------
+Se sulla faccia superiore si è formata una sorta di piccola L, ruotatela, se
+necessario, in modo che la L risulti come specchiata. A questo punto sarà
+sufficiente ripetere l'algoritmo 2 volte prima di risolvere la croce.
+   ___ ___ ___              ___ ___ ___              ___ ___ ___
+  |   | x |   |            |   |   |   |            |   | x |   |
+  '---'---'---'            '---'---'---'            '---'---'---'
+  | x | x |   |    ===>    | x | x | x |    ===>    | x | x | x |
+  '---'---'---'            '---'---'---'            '---'---'---'
+  |   |   |   |            |   |   |   |            |   | x |   |
+  '---'---'---'            '---'---'---'            '---'---'---'
+
+4.1.3 - CASO 3: Punto
+-------------------------------------------------------------------------------
+Se sulla faccia superiore tutti gli spigoli sono ruotati e solo il centro è
+presente come a formare un semplice punto, allora sarà necessario ripetere
+l'algoritmo 3 volte prima di risolvere la croce. Fare attenzione a ruotare
+la faccia superiore correttamente quando si formerà la L.
+   ___ ___ ___          ___ ___ ___          ___ ___ ___          ___ ___ ___
+  |   |   |   |        |   | x |   |        |   |   |   |        |   | x |   |
+  '---'---'---'        '---'---'---'        '---'---'---'        '---'---'---'
+  |   | x |   |  ===>  | x | x |   |  ===>  | x | x | x |  ===>  | x | x | x |
+  '---'---'---'        '---'---'---'        '---'---'---'        '---'---'---'
+  |   |   |   |        |   |   |   |        |   |   |   |        |   | x |   |
+  '---'---'---'        '---'---'---'        '---'---'---'        '---'---'---'
+
+
+4.2 - Orientare La Croce
+===============================================================================
+Una volta creata la croce sulla faccia superiore, esiste la possibilità che
+questa non rispetti i colori dei centri delle facce laterali del cubo e perciò
+sarà necessario permutare gli spigoli in modo da metterla a posto.
+
+Si possono incontrare 3 casi:
+ - 2 spigoli opposti sono orientati correttamente;
+ - 2 spigoli adiacenti sono orientati correttamente;
+ - tutti i 4 spigoli sono orientati correttamente;
+
+Ovviamente se ci troviamo nell'ultimo caso possiamo passare allo step
+successivo.
+
+4.2.1 - CASO 1: Spigoli Adiacenti
+-------------------------------------------------------------------------------
+Per risolvere questo caso, dobbiamo ruotare il cubo in modo che i due spigoli
+correttamente posizionati si trovino sulla faccia di destra e su quella
+posteriore. Tenendo il cubo in quella posizione rispetto a noi, possiamo
+eseguire il seguente algoritmo e ruotare poi la faccia superiore se necessario
+per sistemare la croce.
+                                R U R'U R U2 R'
+       ___                          ___
+   ___ ___ ___                  ___ ___ ___
+  |   | x |   |                |   | x |   |
+  '---'---'---'                '---'---'---'
+  | x | x | x | |    ===>    | | x | x | x | |
+  '---'---'---' '            ' '---'---'---' '
+  |   | x |   |                |   | x |   |
+  '---'---'---'                '---'---'---'
+                                    ---
+
+Nota: questo algoritmo è chiamato SUNE; esiste anche la versione riflessa
+      chiamata anti-SUNE. Vengono usate nel metodo Fridrich per ruotare i
+      vertici della faccia superiore.
+
+4.2.2 - CASO 2: Spigoli Opposti
+-------------------------------------------------------------------------------
+Per risolvere questo caso è sufficiente ruotare il cubo in modo che gli spigoli
+correttamente posizionati si trovino sulla faccia anteriore e posteriore.
+A questo punto applicando una volta la SUNE ci riconduciamo al caso precedente
+ed è quindi necessario ripete l'algoritmo per concludere.
+       ___                      ___                         ___
+   ___ ___ ___              ___ ___ ___                 ___ ___ ___
+  |   | x |   |            |   | x |   |               |   | x |   |
+  '---'---'---'            '---'---'---'               '---'---'---'
+  | x | x | x |    ===>    | x | x | x | |    ===>   | | x | x | x | |
+  '---'---'---'            '---'---'---' '           ' '---'---'---' '
+  |   | x |   |            |   | x |   |               |   | x |   |
+  '---'---'---'            '---'---'---'               '---'---'---'
+       ---                                                  ---
+
+
+4.3 - Permutare Gli Angoli
+===============================================================================
+Una volta che abbiamo sulla faccia superiore una croce correttamente orientata,
+possiamo non considerarla più e passare a lavorare sui quattro angoli.
+Il prossimo passo sarà scambiare di posto gli angoli in modo che siano
+posizionati nel loro posto definitivo rispetto ai colori delle 3 facce adiacenti
+tralasciando per il momento la loro rotazione: questo vuol dire che
+considereremo posizionato correttamente un angolo quando si troverà tra le tre
+facce che avranno i suoi stessi tre colori.
+
+Per prima cosa bisogna ruotare l'intero cubo per vedere se abbiamo almeno un
+angolo già al suo posto. Se sì, teniamo il cubo in modo che questo angolo
+rimanga, rispetto a noi, sulla faccia superiore in basso a sinistra.
+   ___ ___ ___
+  |   |   |   |  La posizione dove deve trovarsi l'angolo posizionato
+  '---'---'---'  correttamente osservando la faccia superiore del cubo.
+  |   |   |   |
+  '---'---'---'
+  | O |   |   |
+  '---'---'---'
+
+Applichiamo questo algoritmo in modo da scambiare di posto gli altri 3 angoli
+rimanenti.
+                               R U'L'U R'U'L U
+
+Nota: se nessuno angolo dei 4 è al suo posto possiamo applicare semplicemente
+      l'algoritmo.
+
+L'algoritmo verrà applicato più volte fino a che tutti e 4 gli angoli non
+saranno correttamente posizionati. È importante applicare l'algoritmo
+mantenendo sempre un angolo posizionato correttamente sulla faccia superiore in
+basso a sinistra.
+
+
+4.4 - Ruotare Gli Angoli
+===============================================================================
+Ora che tutti gli angoli sono al loro posto non dobbiamo far altro che ruotarli
+in modo che il colore della faccia superiore sia rivolto verso l'alto così da
+completare l'intero cubo.
+
+Per fare questo si dovrà applicare un semplice algoritmo più volte senza MAI
+ruotare il cubo, ma soltanto la faccia superiore se necessario.
+   ___ ___ ___
+  |   |   |   |  L'algoritmo che andremo ad usare cercherà volta volta di
+  '---'---'---'  cambiare la rotazione dell'angolo in posizione mostrata in
+  |   |   |   |  figura.
+  '---'---'---'
+  |   |   | O |
+  '---'---'---'
+
+Applichiamo l'algoritmo
+                                    R'D'R D
+
+se l'angolo non è ancora ruotato correttamente lo applichiamo un'altra volta,
+e ancora fino a che non sarà ruotato bene. A questo punto ruotiamo la faccia
+superiore in modo da portare nella posiziona indicata in figura sopra, un altro
+angolo da ruotare.
+
+Se abbiamo eseguito tutto correttamente senza aver cambiato posizione al cubo
+e senza aver ruotato la faccia prima di aver completato l'intero algoritmo,
+appena l'ultimo vertice si girerà correttamente, anche il resto del cubo si
+ricomporrà e sarà sufficiente correggere la posizione dei vari livelli per
+terminare il cubo.
+
+
+
+
+===============================================================================
+5 - Algoritmi Usati
+===============================================================================
+
++---------+------------------+---------------------+----------------+
+| Livello | Uso              | Algoritmo           | Nome           |
++---------+------------------+---------------------+----------------+
+|       2 | spigolo a DX     |    U R U'R'U'F'U F  |                |
+|         |                  |    U R U'R'F R'F'R  |                |
+|       2 | spigolo a SX     |    U'L'U L U F U'F' |                |
+|         |                  |    U'L'U L F'L F L' |                |
+|       3 | croce            |    F (R U R' U') F' | F(sexy-move)F' |
+|       3 | croce orientata  | (R U R'U R U2 R') F | (SUNE) F       |
+|       3 | permutare angoli |     R U'L'U R'U'L U |                |
+|       3 | ruotare angoli   |             R'D'R D |                |
++---------+------------------+---------------------+----------------+
